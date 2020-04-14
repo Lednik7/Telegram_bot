@@ -14,17 +14,9 @@ def send_welcome(message):
 def random_text(message):
     if "погода" not in (message.text).lower():
         bot.send_message(message.from_user.id, "Обращайся по погоде")
-        keyboard = types.InlineKeyboardMarkup()
-        key_weather = types.InlineKeyboardButton(text='Погода', callback_data="weather")
-        keyboard.add(key_weather)
     else:
         bot.register_next_step_handler(message, get_text_messages)
         
-@bot.callback_query_handler(func=lambda call: True)
-def callback_worker(call):
-    if call.data == "weather":
-        bot.send_message(message.from_user.id, "Какой населенный пункт тебе нужен?")
-        bot.register_next_step_handler(message, get_weather)
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
