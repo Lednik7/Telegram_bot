@@ -8,7 +8,7 @@ def send_welcome(message):
 	
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
-    if message.lower() == "погода":
+    if (message.text).lower() == "погода":
         bot.reply_to("Yes")
 
 @bot.message_handler(func=lambda message: True)
