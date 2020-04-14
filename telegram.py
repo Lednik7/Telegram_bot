@@ -18,29 +18,29 @@ def random_text(message):
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
-    if "погода" in (message.text).lower():
+    if "погода" == (message.text).lower():
         bot.send_message(message.from_user.id, "Какой населенный пункт тебе нужен?")
-        place = (message.text).lower()
         bot.register_next_step_handler(message, get_weather)
         
 @bot.message_handler(content_types=['text'])
 def get_weather(message):
-        try:
-            observation = owm.weather_at_place(place)
+    place = (message.text).lower()
+    try:
+        observation = owm.weather_at_place(place)
 
-            w = observation.get_weather()
+        w = observation.get_weather()
 
-            temp = w.get_temperature('celsius')["temp"]
+        temp = w.get_temperature('celsius')["temp"]
 
-            bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status(), str(round(temp)) + "°C")
-            bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
-            bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
+        bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status(), str(round(temp)) + "°C")
+        bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
+        bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
             
-            bot.send_message(message.from_user.id, "Обращайся, если хочешь узнать погоду)")
+        bot.send_message(message.from_user.id, "Обращайся, если хочешь узнать погоду)")
 
-        except:
+    except:
 
-            bot.send_message(message.from_user.id, "Прости, но я не нашел информацию по населенному пунктку '" + place + "'")
+        bot.send_message(message.from_user.id, "Прости, но я не нашел информацию по населенному пунктку '" + place + "'")
             
         
 bot.polling(none_stop=True, interval=0)
