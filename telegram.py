@@ -16,4 +16,4 @@ def echo_all(message):
 	bot.reply_to(message, message.text)
 	
 
-bot.polling()
+bot.polling(none_stop=True, interval=0)
