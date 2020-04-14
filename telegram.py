@@ -13,14 +13,19 @@ def send_welcome(message):
 def random_text(message):
     if "погода" not in (message.text).lower():
         bot.send_message(message.from_user.id, "Обращайся по погоде")
+    else:
+        bot.register_next_step_handler(message, get_text_messages)
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
     if "погода" in (message.text).lower():
+        bot.send_message(message.from_user.id, "Какой населенный пункт тебе нужен?")
         place = (message.text).lower()
+        bot.register_next_step_handler(message, get_weather)
+        
+@bot.message_handler(content_types=['text'])
+def get_weather(message):
         try:
-            place = place[place.find(" ")+1:]
-            
             observation = owm.weather_at_place(place)
 
             w = observation.get_weather()
