@@ -10,13 +10,6 @@ bot = telebot.TeleBot("1147580820:AAHaQFebkCXVYcgzJsaBsch_kt8YD0sZx_Q")
 def send_welcome(message):
     bot.reply_to(message, "Вот, что я умею: \n ---Пиши 'погода '")
 
-@bot.message_handler(content_types=['text'])
-def random_text(message):
-    if "погода" not in (message.text).lower():
-        bot.send_message(message.from_user.id, "Обращайся по погоде")
-    else:
-        bot.register_next_step_handler(message, get_text_messages)
-        
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
