@@ -13,8 +13,10 @@ def send_welcome(message):
 def get_text_messages(message):
     if "погода" in (message.text).lower():
         #bot.send_message(message.from_user.id, "Какой населенный пункт тебя интересует?")
-        place = ((message.text).lower())[(message.text).lower()).find(" ")+1:]
+        place = (message.text).lower()
         try:
+            place = place[place.find(" ")+1:]
+            
             observation = owm.weather_at_place(place)
 
             w = observation.get_weather()
