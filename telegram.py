@@ -1,5 +1,6 @@
 import telebot
 import pyowm
+from telebot import types
 
 owm = pyowm.OWM("905c95dc8f833e9035b8f633fc478ee6", language = "ru")
 
