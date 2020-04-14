@@ -1,2 +1,2 @@
 pyTelegramBotAPI==3.6.7
-
+pyowm==2.10.0
