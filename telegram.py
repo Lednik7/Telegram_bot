@@ -33,7 +33,7 @@ def get_text_messages(message):
             bot.send_message(message.from_user.id, "Прости, но я не нашел информацию по населенному пунктку '" + place + "'")
             
 @bot.message_handler(content_types=['text'])
-def random_text():
+def random_text(message):
     bot.send_message(message.from_user.id, "Обращайся по погоде")
         
 bot.polling(none_stop=True, interval=0)
