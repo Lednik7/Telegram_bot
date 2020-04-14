@@ -11,7 +11,8 @@ def send_welcome(message):
 
 @bot.message_handler(content_types=['text'])
 def random_text(message):
-    bot.send_message(message.from_user.id, "Обращайся по погоде")
+    if "погода" not in (message.text).lower():
+        bot.send_message(message.from_user.id, "Обращайся по погоде")
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
