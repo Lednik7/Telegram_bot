@@ -34,7 +34,7 @@ def get_text_messages(message):
             
 @bot.message_handler(content_types=['text'])
 def random_text():
-    bot.send_message(message.from_user.id, "Обращайся по погоде)"
+    bot.send_message(message.from_user.id, "Обращайся по погоде")
         
 bot.polling(none_stop=True, interval=0)
 
