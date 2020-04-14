@@ -18,7 +18,8 @@ def random_text(message):
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
-    if ("погода" == ((message.text).lower())[:-1]) or ("погода" in (message.text).lower()):
+    if "погода" == (message.text).lower():
+        bot.send_message(message.from_user.id, message.text)
         bot.send_message(message.from_user.id, "Какой населенный пункт тебе нужен?")
         bot.register_next_step_handler(message, get_weather)
         
