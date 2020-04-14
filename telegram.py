@@ -13,8 +13,10 @@ def send_welcome(message):
 def get_text_messages(message):
     if (message.text).lower() == "погода":
         bot.send_message(message.from_user.id, "Какой населенный пункт тебя интересует?")
+        
+        place = (message.text).lower()
         try:
-            observation = owm.weather_at_place((message.text).lower())
+            observation = owm.weather_at_place(place)
 
             w = observation.get_weather()
 
@@ -26,6 +28,6 @@ def get_text_messages(message):
 
         except:
 
-            bot.send_message(message.from_user.id, "Прости, но я не нашел информацию по населенному пунктку '" + home + "'")
+            bot.send_message(message.from_user.id, "Прости, но я не нашел информацию по населенному пунктку '" + place + "'")
         
 bot.polling(none_stop=True, interval=0)
