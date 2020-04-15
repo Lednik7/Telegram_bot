@@ -21,7 +21,8 @@ def get_text_messages(message):
         
 @bot.message_handler(content_types=['text'])
 def get_weather(message):
-    global place = (message.text).lower()
+    global place
+    place = (message.text).lower()
     try:
         observation = owm.weather_at_place(place)
 
