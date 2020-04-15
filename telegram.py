@@ -33,7 +33,7 @@ def get_weather(message):
         bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status() + " " + str(round(temp)) + "°C")
 
 
-        bot.register_next_step_handler(message, get_weather)
+        bot.register_next_step_handler(message, get_weather_detailed)
     except:
 
         bot.send_message(message.from_user.id, "Прости, но я не нашел информацию по населенному пунктку '" + place + "'")
