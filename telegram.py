@@ -27,7 +27,7 @@ def get_weather(message):
 
         temp = w.get_temperature('celsius')["temp"]
 
-        bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status(), str(round(temp)) + "°C")
+        bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status() + str(round(temp)) + "°C")
         bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
         bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
             
