@@ -47,7 +47,7 @@ def get_weather_detailed(message):
             bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
             
             bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
-        expect:
+        except:
             bot.send_message(message.from_user.id, "Что-то пошло не так(")
         
 bot.polling(none_stop=True, interval=0)
