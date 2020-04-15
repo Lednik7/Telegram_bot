@@ -69,7 +69,7 @@ def get_weather_detailed(message):
             
             bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
             
-            bot.send_message(message.from_user.id, "Больше информации здесь: " + unidecode(place))
+            bot.send_message(message.from_user.id, "Больше информации здесь: https://yandex.ru/pogoda/" + unidecode(place))
             
         except:
             bot.send_message(message.from_user.id, "Что-то пошло не так(")
