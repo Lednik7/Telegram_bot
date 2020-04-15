@@ -1,13 +1,17 @@
 import telebot
 import pyowm
 from telebot import types
+import random
 
 owm = pyowm.OWM("905c95dc8f833e9035b8f633fc478ee6", language = "ru")
 
 bot = telebot.TeleBot("1147580820:AAHaQFebkCXVYcgzJsaBsch_kt8YD0sZx_Q")
 
+hi = ["Привет!", "Как делишки?", "Давно не виделись)", "Приветсвую", "Рад тебя видеть!)", "Здравствуй!"]
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
+    bot.send_message(message.from_user.id, random.choice(hi))
     bot.reply_to(message, "Вот, что я умею: \n --- Пиши 'Погода'")
 
 
