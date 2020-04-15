@@ -23,16 +23,18 @@ def get_text_messages(message):
 def get_weather(message):
     global place
     place = (message.text).lower()
+    global w
     try:
         observation = owm.weather_at_place(place)
-
+        
         w = observation.get_weather()
 
         temp = w.get_temperature('celsius')["temp"]
 
         bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status() + " " + str(round(temp)) + "°C")
 
-
+        bot.send_message(message.from_user.id, "Хочешь узнать подробности? Если хочешь пиши 'Да'")
+        
         bot.register_next_step_handler(message, get_weather_detailed)
     except:
 
@@ -40,14 +42,13 @@ def get_weather(message):
         
 @bot.message_handler(content_types=['text'])
 def get_weather_detailed(message):
-    
-    bot.send_message(message.from_user.id, "Хочешь узнать подробности? Если хочешь пиши 'Да'")
-    
+
     if (message.text).lower() == "да":
         try:
             bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
             
             bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
+            
         except:
             bot.send_message(message.from_user.id, "Что-то пошло не так(")
         
