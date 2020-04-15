@@ -2,6 +2,7 @@ import telebot
 import pyowm
 from telebot import types
 import random
+from unidecode import unidecode
 
 owm = pyowm.OWM("905c95dc8f833e9035b8f633fc478ee6", language = "ru")
 
@@ -67,6 +68,8 @@ def get_weather_detailed(message):
             bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
             
             bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
+            
+            bot.send_message(message.from_user.id, "Больше информации здесь: " + unidecode(place))
             
         except:
             bot.send_message(message.from_user.id, "Что-то пошло не так(")
