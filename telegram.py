@@ -9,6 +9,12 @@ bot = telebot.TeleBot("1147580820:AAHaQFebkCXVYcgzJsaBsch_kt8YD0sZx_Q")
 
 hi = ["Привет!", "Как делишки?", "Давно не виделись)", "Приветсвую", "Рад тебя видеть!)", "Здравствуй!"]
 
+cold = ["шапку", " теплую куртку", "джинсы"]
+
+mormal = ["кепку", "ветровку", "джинсы"]
+
+hot = ["кепку", "футболку", "легкие джинсы или шорты"]
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     bot.send_message(message.from_user.id, random.choice(hi))
@@ -36,8 +42,15 @@ def get_weather(message):
         temp = w.get_temperature('celsius')["temp"]
 
         bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status() + " " + str(round(temp)) + "°C")
-
-        bot.send_message(message.from_user.id, "Хочешь узнать подробности? Если хочешь пиши 'Да'")
+        
+        if temp <= 0:
+            bot.send_message(message.from_user.id, "На улице холодно. Думаю тебе стоит одеть" + cold[0] + ", сверху" + cold[1] + "и" + cold[2])
+        elif temp > 0 and temp <= 16:
+            bot.send_message(message.from_user.id, "На улице холодно. Думаю тебе стоит одеть" + normal[0] + ", сверху" + normal[1] + "и" + normal[2])
+        elif temp > 16:
+            bot.send_message(message.from_user.id, "На улице холодно. Думаю тебе стоит одеть" + hot[0] + ", сверху" + hot[1] + "и" + hot[2])
+ 
+        bot.send_message(message.from_user.id, "Хочешь узнать подробности? Если хочешь пиши 'Подробности'")
         
         bot.register_next_step_handler(message, get_weather_detailed)
     except:
