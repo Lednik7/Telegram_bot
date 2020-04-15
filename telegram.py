@@ -71,6 +71,7 @@ def get_weather_detailed(message):
         except:
             bot.send_message(message.from_user.id, "Что-то пошло не так(")
     else:
+        bot.send_message(message.from_user.id, "Прости, но я тебя не понял")
         bot.register_next_step_handler(message, get_text_messages)
         
 bot.polling(none_stop=True, interval=0)
