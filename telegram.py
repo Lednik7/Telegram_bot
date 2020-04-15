@@ -46,9 +46,11 @@ def get_weather(message):
         if temp <= 0:
             bot.send_message(message.from_user.id, "На улице холодно. Думаю тебе стоит одеть" + cold[0] + ", сверху" + cold[1] + " и" + cold[2])
         elif temp > 0 and temp <= 16:
-            bot.send_message(message.from_user.id, "На улице холодно. Думаю тебе стоит одеть" + normal[0] + ", сверху" + normal[1] + " и" + normal[2])
-        elif temp > 16:
-            bot.send_message(message.from_user.id, "На улице холодно. Думаю тебе стоит одеть" + hot[0] + ", сверху" + hot[1] + " и" + hot[2])
+            bot.send_message(message.from_user.id, "На улице прохоладно. Думаю тебе стоит одеть" + normal[0] + ", сверху" + normal[1] + " и" + normal[2])
+        elif temp > 16 and temp <= 23:
+            bot.send_message(message.from_user.id, "На улице тепло. Думаю тебе стоит одеть" + hot[0] + ", сверху" + hot[1] + " и" + hot[2])
+        elif temp > 23:
+            bot.send_message(message.from_user.id, "На улице жарко. Думаю стоит просто одеть легкую одежду. Не забудь кепку!")
  
         bot.send_message(message.from_user.id, "Хочешь узнать подробности? Если хочешь пиши 'Подробности'")
         
