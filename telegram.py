@@ -8,7 +8,7 @@ bot = telebot.TeleBot("1147580820:AAHaQFebkCXVYcgzJsaBsch_kt8YD0sZx_Q")
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    bot.reply_to(message, "Вот, что я умею: \n ---Пиши 'погода '")
+    bot.reply_to(message, "Вот, что я умею: \n --- Пиши 'Погода'")
 
 
 @bot.message_handler(content_types=['text'])
@@ -21,7 +21,7 @@ def get_text_messages(message):
         
 @bot.message_handler(content_types=['text'])
 def get_weather(message):
-    place = (message.text).lower()
+    global place = (message.text).lower()
     try:
         observation = owm.weather_at_place(place)
 
@@ -30,15 +30,24 @@ def get_weather(message):
         temp = w.get_temperature('celsius')["temp"]
 
         bot.send_message(message.from_user.id, "Сейчас на улице: " + w.get_detailed_status() + " " + str(round(temp)) + "°C")
-        bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
-        bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
-            
-        bot.send_message(message.from_user.id, "Обращайся, если хочешь узнать погоду)")
 
+
+        bot.register_next_step_handler(message, get_weather)
     except:
 
         bot.send_message(message.from_user.id, "Прости, но я не нашел информацию по населенному пунктку '" + place + "'")
+        
+@bot.message_handler(content_types=['text'])
+def get_weather_detailed(message):
+    
+    bot.send_message(message.from_user.id, "Хочешь узнать подробности? Если хочешь пиши 'Да'")
+    
+    if (message.text).lower() == "да":
+        try:
+            bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
             
+            bot.send_message(message.from_user.id, "Влажность воздуха: " + str(w.get_humidity()) + "%")
+        expect:
+            bot.send_message(message.from_user.id, "Что-то пошло не так(")
         
 bot.polling(none_stop=True, interval=0)
-
