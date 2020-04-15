@@ -62,7 +62,7 @@ def get_weather(message):
 @bot.message_handler(content_types=['text'])
 def get_weather_detailed(message):
 
-    if (message.text).lower() == "да":
+    if (message.text).lower() == "подробности":
         try:
             bot.send_message(message.from_user.id, "Скорость ветра: " + str(w.get_wind()["speed"]) + " м/с")
             
